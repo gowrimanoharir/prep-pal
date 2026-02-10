@@ -72,6 +72,7 @@ export default async function handler(
       },
     });
 
+    console.log('OpenAI API Response:', JSON.stringify(response, null, 2));
     return res.status(200).json(response);
   } catch (error) {
     console.error('Error generating quiz:', error);
