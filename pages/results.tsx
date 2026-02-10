@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useQuiz } from '@/contexts/QuizContext';
 import { ScoreSummary } from '@/components/quiz/ScoreSummary';
 import { ResultCard } from '@/components/quiz/ResultCard';
+import { getCategoryDisplay, getSubcategoryDisplay } from '@/constants/categories';
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -50,11 +51,19 @@ export default function ResultsPage() {
     resetQuiz();
     setLoading(true);
 
+    // Map IDs to display values for the API
+    const apiPayload = {
+      category: getCategoryDisplay(config.category),
+      subcategory: getSubcategoryDisplay(config.subcategory),
+      numQuestions: config.numQuestions,
+      difficulty: config.difficulty,
+    };
+
     try {
       const response = await fetch('/api/generate-quiz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(config),
+        body: JSON.stringify(apiPayload),
       });
 
       if (!response.ok) {

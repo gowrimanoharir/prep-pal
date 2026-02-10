@@ -7,6 +7,8 @@ import { ErrorNotification } from '@/components/ui/ErrorNotification';
 import {
   CATEGORIES,
   getSubcategoriesByCategory,
+  getCategoryDisplay,
+  getSubcategoryDisplay,
   DEFAULT_NUM_QUESTIONS,
   MIN_QUESTIONS,
   MAX_QUESTIONS,
@@ -93,11 +95,19 @@ export default function Home() {
     setConfig(config);
     setLoading(true);
 
+    // Map IDs to display values for the API
+    const apiPayload = {
+      category: getCategoryDisplay(category),
+      subcategory: getSubcategoryDisplay(subcategory),
+      numQuestions,
+      difficulty,
+    };
+
     try {
       const response = await fetch('/api/generate-quiz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(config),
+        body: JSON.stringify(apiPayload),
       });
 
       if (!response.ok) {
