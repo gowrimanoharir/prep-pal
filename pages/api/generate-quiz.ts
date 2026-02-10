@@ -1,16 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
-interface OpenAIResponseWithParsed {
-  output_parsed: {
-    questions: Array<{
-      question: string;
-      topic: string;
-      type: string;
-      possible_ans: Record<string, string>;
-      answer: string;
-    }>;
-  };
+interface OpenAIResponseWithOutput {
+  output_text: string;
 }
 
 export default async function handler(
@@ -86,8 +78,11 @@ export default async function handler(
 
     console.log('OpenAI API Response:', JSON.stringify(response, null, 2));
     
-    // Extract the parsed output from OpenAI response
-    const quizData = (response as unknown as OpenAIResponseWithParsed).output_parsed;
+    // Extract and parse the output_text from OpenAI response
+    const outputText = (response as unknown as OpenAIResponseWithOutput).output_text;
+    console.log('Output text:', outputText);
+    
+    const quizData = JSON.parse(outputText);
     console.log('Parsed quiz data:', JSON.stringify(quizData, null, 2));
     
     return res.status(200).json(quizData);
