@@ -101,16 +101,32 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to generate quiz');
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        setLoading(false);
+        setError(errorData.error || 'Failed to generate quiz. Please try again.');
+        return;
       }
 
       const data = await response.json();
+      
+      if (!data.questions || !Array.isArray(data.questions)) {
+        setLoading(false);
+        setError('Invalid quiz data received. Please try again.');
+        return;
+      }
+      
+      if (data.questions.length === 0) {
+        setLoading(false);
+        setError('No questions generated. Please try again.');
+        return;
+      }
+      
       setQuestions(data.questions);
       setLoading(false);
       router.push('/quiz');
     } catch (err) {
       setLoading(false);
-      setError('Failed to generate quiz. Please try again.');
+      setError('Network error. Please check your connection and try again.');
       console.error(err);
     }
   };

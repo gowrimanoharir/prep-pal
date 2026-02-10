@@ -1,6 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 
+interface OpenAIResponseWithParsed {
+  output_parsed: {
+    questions: Array<{
+      question: string;
+      topic: string;
+      type: string;
+      possible_ans: Record<string, string>;
+      answer: string;
+    }>;
+  };
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -73,7 +85,12 @@ export default async function handler(
     });
 
     console.log('OpenAI API Response:', JSON.stringify(response, null, 2));
-    return res.status(200).json(response);
+    
+    // Extract the parsed output from OpenAI response
+    const quizData = (response as unknown as OpenAIResponseWithParsed).output_parsed;
+    console.log('Parsed quiz data:', JSON.stringify(quizData, null, 2));
+    
+    return res.status(200).json(quizData);
   } catch (error) {
     console.error('Error generating quiz:', error);
     return res.status(500).json({ 
