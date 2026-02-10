@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useQuiz } from '@/contexts/QuizContext';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { ErrorNotification } from '@/components/ui/ErrorNotification';
@@ -32,7 +31,6 @@ export default function Home() {
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
     setSubcategory('');
-    setValidationError('');
   };
 
   const handleIncrement = () => {
@@ -53,12 +51,12 @@ export default function Home() {
 
   const handleNumQuestionsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setNumQuestionsInput(value); // Allow any input while typing
+    setNumQuestionsInput(value);
   };
 
   const handleNumQuestionsBlur = () => {
     const numValue = parseInt(numQuestionsInput);
-    
+
     if (isNaN(numValue) || numValue < MIN_QUESTIONS) {
       setNumQuestions(MIN_QUESTIONS);
       setNumQuestionsInput(MIN_QUESTIONS.toString());
@@ -74,12 +72,12 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setValidationError('');
-    setError(null);
 
     if (!category) {
       setValidationError('Please select a category');
       return;
     }
+
     if (!subcategory) {
       setValidationError('Please select a subcategory');
       return;
@@ -145,17 +143,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-night-darkest py-8 px-4">
-      <div className="max-w-3xl mx-auto">
-        {/* Title Card */}
-        <div className="bg-night-dark border border-border-default rounded-lg p-6 mb-6">
-          <Link href="/">
-            <h1 className="text-2xl font-semibold text-text-primary text-center cursor-pointer hover:text-primary transition-colors">
-              Prep Pal
-            </h1>
-          </Link>
-        </div>
-
+    <div className="min-h-screen bg-night-darkest">
+      <div className="max-w-2xl mx-auto py-8 px-4">
         {/* Error Messages */}
         {error && (
           <ErrorNotification message={error} onClose={() => setError(null)} autoClose />
@@ -164,57 +153,75 @@ export default function Home() {
           <ErrorNotification message={validationError} onClose={() => setValidationError('')} />
         )}
 
-        {/* Form Cards */}
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Category Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg p-6">
-            <label className="block text-sm font-medium text-text-secondary mb-2">
-              Category
-            </label>
-            <select
-              value={category}
-              onChange={handleCategoryChange}
-              className="w-full bg-night-medium border border-border-default rounded-md px-4 py-3 text-text-primary text-base focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light hover:border-border-subtle transition-all"
-            >
-              <option value="">Select a category</option>
-              {CATEGORIES.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.display}
-                </option>
-              ))}
-            </select>
+          {/* Hero Card - Large Prominent Card */}
+          <div className="bg-night-overlay border-t-2 border-t-primary rounded-2xl p-8">
+            <h1 className="text-2xl font-semibold text-text-primary mb-2">
+              Create Your Quiz
+            </h1>
+            <p className="text-text-secondary text-base">
+              Select your preferences to generate personalized questions
+            </p>
           </div>
 
-          {/* Subcategory Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg p-6">
-            <label className="block text-sm font-medium text-text-secondary mb-2">
-              Subcategory
-            </label>
-            <select
-              value={subcategory}
-              onChange={(e) => setSubcategory(e.target.value)}
-              disabled={!category}
-              className="w-full bg-night-medium border border-border-default rounded-md px-4 py-3 text-text-primary text-base focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light hover:border-border-subtle transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <option value="">Select a subcategory</option>
-              {subcategoryOptions.map((sub) => (
-                <option key={sub.id} value={sub.id}>
-                  {sub.display}
-                </option>
-              ))}
-            </select>
+          {/* Category and Subcategory - Grid of 2 */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* Category Card */}
+            <div className="bg-night-dark rounded-xl p-6">
+              <label className="block text-sm font-medium text-text-secondary mb-3">
+                Category
+              </label>
+              <select
+                value={category}
+                onChange={handleCategoryChange}
+                className="w-full bg-night-medium border border-border-default rounded-full px-4 py-3 text-text-primary text-base font-sans focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light hover:border-border-subtle transition-all"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
+                <option value="">Select category</option>
+                {CATEGORIES.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.display}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Subcategory Card */}
+            <div className="bg-night-dark rounded-xl p-6">
+              <label className="block text-sm font-medium text-text-secondary mb-3">
+                Subcategory
+              </label>
+              <select
+                value={subcategory}
+                onChange={(e) => setSubcategory(e.target.value)}
+                disabled={!category}
+                className="w-full bg-night-medium border border-border-default rounded-full px-4 py-3 text-text-primary text-base font-sans focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light hover:border-border-subtle transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
+                <option value="">Select subcategory</option>
+                {subcategoryOptions.map((sub) => (
+                  <option key={sub.id} value={sub.id}>
+                    {sub.display}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          {/* Number of Questions Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg p-6">
-            <label className="block text-sm font-medium text-text-secondary mb-3">
+          {/* Number of Questions - Full Width Card */}
+          <div className="bg-night-dark rounded-xl p-6">
+            <label className="block text-sm font-medium text-text-secondary mb-4 text-center">
               Number of Questions
             </label>
-            <div className="flex items-center justify-center gap-4">
+            <div className="text-center mb-4">
+              <span className="text-3xl font-bold text-text-primary">{numQuestions}</span>
+            </div>
+            <div className="flex items-center justify-center gap-4 mb-3">
               <button
                 type="button"
                 onClick={handleDecrement}
-                className="bg-night-medium border border-border-default rounded px-4 py-2 text-text-primary text-lg hover:bg-night-light hover:border-primary transition-all"
+                className="bg-night-medium border border-border-default rounded-full w-10 h-10 flex items-center justify-center text-text-primary text-xl hover:bg-night-light hover:border-primary transition-all"
               >
                 −
               </button>
@@ -225,33 +232,33 @@ export default function Home() {
                 onBlur={handleNumQuestionsBlur}
                 min={MIN_QUESTIONS}
                 max={MAX_QUESTIONS}
-                className="bg-night-medium border border-border-default rounded px-6 py-2 w-20 text-center text-text-primary text-lg font-semibold focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="bg-night-medium border border-border-default rounded-full px-6 py-2 w-24 text-center text-text-primary text-lg font-semibold focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
               <button
                 type="button"
                 onClick={handleIncrement}
-                className="bg-night-medium border border-border-default rounded px-4 py-2 text-text-primary text-lg hover:bg-night-light hover:border-primary transition-all"
+                className="bg-night-medium border border-border-default rounded-full w-10 h-10 flex items-center justify-center text-text-primary text-xl hover:bg-night-light hover:border-primary transition-all"
               >
                 +
               </button>
             </div>
-            <p className="text-xs text-text-tertiary text-center mt-3">
+            <p className="text-xs text-text-tertiary text-center">
               Choose between {MIN_QUESTIONS} and {MAX_QUESTIONS} questions
             </p>
           </div>
 
           {/* Difficulty Level Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg p-6">
-            <label className="block text-sm font-medium text-text-secondary mb-3">
+          <div className="bg-night-dark rounded-xl p-6">
+            <label className="block text-sm font-medium text-text-secondary mb-4 text-center">
               Difficulty Level
             </label>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <button
                 type="button"
                 onClick={() => setDifficulty('Beginner')}
-                className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
+                className={`flex-1 rounded-full px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Beginner'
-                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary'
                     : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
@@ -260,9 +267,9 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setDifficulty('Intermediate')}
-                className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
+                className={`flex-1 rounded-full px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Intermediate'
-                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary'
                     : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
@@ -271,9 +278,9 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setDifficulty('Senior')}
-                className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
+                className={`flex-1 rounded-full px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Senior'
-                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary'
                     : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
@@ -282,11 +289,11 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Generate Button - Centered, Outside Cards */}
-          <div className="flex justify-center pt-2">
+          {/* Generate Button - Centered */}
+          <div className="flex justify-center mt-8">
             <button
               type="submit"
-              className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all"
+              className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-full text-lg hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all"
             >
               Generate Quiz
             </button>
