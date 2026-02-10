@@ -148,7 +148,7 @@ export default function Home() {
     <div className="min-h-screen bg-night-darkest py-8 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Title Card */}
-        <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6 mb-6">
+        <div className="bg-night-dark border border-border-default rounded-lg p-6 mb-6">
           <Link href="/">
             <h1 className="text-2xl font-semibold text-text-primary text-center cursor-pointer hover:text-primary transition-colors">
               Prep Pal
@@ -167,7 +167,7 @@ export default function Home() {
         {/* Form Cards */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Category Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+          <div className="bg-night-dark border border-border-default rounded-lg p-6">
             <label className="block text-sm font-medium text-text-secondary mb-2">
               Category
             </label>
@@ -186,7 +186,7 @@ export default function Home() {
           </div>
 
           {/* Subcategory Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+          <div className="bg-night-dark border border-border-default rounded-lg p-6">
             <label className="block text-sm font-medium text-text-secondary mb-2">
               Subcategory
             </label>
@@ -206,7 +206,7 @@ export default function Home() {
           </div>
 
           {/* Number of Questions Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+          <div className="bg-night-dark border border-border-default rounded-lg p-6">
             <label className="block text-sm font-medium text-text-secondary mb-3">
               Number of Questions
             </label>
@@ -241,7 +241,7 @@ export default function Home() {
           </div>
 
           {/* Difficulty Level Card */}
-          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+          <div className="bg-night-dark border border-border-default rounded-lg p-6">
             <label className="block text-sm font-medium text-text-secondary mb-3">
               Difficulty Level
             </label>
@@ -251,7 +251,7 @@ export default function Home() {
                 onClick={() => setDifficulty('Beginner')}
                 className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Beginner'
-                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
                     : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
@@ -262,7 +262,7 @@ export default function Home() {
                 onClick={() => setDifficulty('Intermediate')}
                 className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Intermediate'
-                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
                     : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
@@ -273,7 +273,7 @@ export default function Home() {
                 onClick={() => setDifficulty('Senior')}
                 className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Senior'
-                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
                     : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
@@ -286,7 +286,7 @@ export default function Home() {
           <div className="flex justify-center pt-2">
             <button
               type="submit"
-              className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-[0_2px_8px_rgba(130,170,255,0.3)] hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)]"
+              className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all"
             >
               Generate Quiz
             </button>

@@ -26,8 +26,8 @@ export const ResultCard: React.FC<ResultCardProps> = ({
         bg-night-dark border border-border-default rounded-lg overflow-hidden mb-4
         ${
           isCorrect
-            ? 'border-l-4 border-l-success shadow-[0_2px_8px_rgba(0,0,0,0.3),0_0_20px_rgba(173,219,103,0.1)]'
-            : 'border-l-4 border-l-error shadow-[0_2px_8px_rgba(0,0,0,0.3),0_0_20px_rgba(247,140,108,0.1)]'
+            ? 'border-l-4 border-l-success'
+            : 'border-l-4 border-l-error'
         }
       `}
       style={{
@@ -44,9 +44,9 @@ export const ResultCard: React.FC<ResultCardProps> = ({
               Question {questionNumber}
             </h3>
             {isCorrect ? (
-              <span className="text-success text-2xl font-bold" style={{textShadow: '0 0 8px rgba(173, 219, 103, 0.5)'}}>✓</span>
+              <span className="text-success text-2xl font-bold">✓</span>
             ) : (
-              <span className="text-error text-2xl font-bold" style={{textShadow: '0 0 8px rgba(247, 140, 108, 0.5)'}}>✗</span>
+              <span className="text-error text-2xl font-bold">✗</span>
             )}
           </div>
           <p className="text-sm text-text-secondary">

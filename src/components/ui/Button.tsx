@@ -19,15 +19,14 @@ export const Button: React.FC<ButtonProps> = ({
   const variantStyles = {
     primary: `
       bg-primary text-night-darkest border-none rounded-md px-8 py-3 text-base font-semibold
-      shadow-[0_2px_8px_rgba(130,170,255,0.3)]
-      hover:bg-primary-hover hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)] hover:-translate-y-0.5
+      hover:bg-primary-hover hover:-translate-y-0.5
       active:translate-y-0
-      disabled:bg-night-medium disabled:text-text-tertiary disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:transform-none
+      disabled:bg-night-medium disabled:text-text-tertiary disabled:cursor-not-allowed disabled:opacity-50 disabled:transform-none
       focus-visible:shadow-[0_0_0_3px_rgba(130,170,255,0.4)] focus-visible:border-primary
     `,
     secondary: `
       bg-transparent text-primary border border-primary rounded-md px-8 py-3 text-base font-medium
-      hover:bg-[rgba(130,170,255,0.15)] hover:border-primary-light hover:shadow-glow-primary
+      hover:bg-[rgba(130,170,255,0.15)] hover:border-primary-light
       focus-visible:shadow-[0_0_0_3px_rgba(130,170,255,0.4)]
     `,
     nav: `

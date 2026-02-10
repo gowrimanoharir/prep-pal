@@ -105,7 +105,7 @@ export default function ResultsPage() {
     <div className="min-h-screen bg-night-darkest py-8 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6 mb-6">
+        <div className="bg-night-dark border border-border-default rounded-lg p-6 mb-6">
           <Link href="/">
             <h1 className="text-2xl font-semibold text-text-primary text-center cursor-pointer hover:text-primary transition-colors">
               Prep Pal
@@ -137,13 +137,13 @@ export default function ResultsPage() {
         <div className="mt-8 flex justify-center gap-4 pb-8">
           <button
             onClick={handleTryAgain}
-            className="bg-transparent border border-primary text-primary px-8 py-3 rounded-md font-medium hover:bg-[rgba(130,170,255,0.15)] hover:border-primary-light hover:shadow-glow-primary transition-all"
+            className="bg-transparent border border-primary text-primary px-8 py-3 rounded-md font-medium hover:bg-[rgba(130,170,255,0.15)] hover:border-primary-light transition-all"
           >
             Try Again
           </button>
           <button
             onClick={handleNewQuiz}
-            className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-[0_2px_8px_rgba(130,170,255,0.3)] hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)]"
+            className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all"
           >
             New Quiz
           </button>

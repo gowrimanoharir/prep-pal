@@ -40,7 +40,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
               cursor-pointer transition-all duration-200 ease-in-out
               ${
                 value === option.value
-                  ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                  ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium'
                   : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
               }
             `}

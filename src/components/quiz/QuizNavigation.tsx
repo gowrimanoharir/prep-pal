@@ -84,7 +84,7 @@ export const QuizNavigation: React.FC<QuizNavigationProps> = ({
         <div className="flex justify-center mt-6">
           <button
             onClick={onSubmit}
-            className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 shadow-[0_2px_8px_rgba(130,170,255,0.3)] hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)]"
+            className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
           >
             Submit Quiz
           </button>

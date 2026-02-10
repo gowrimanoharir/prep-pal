@@ -27,7 +27,7 @@ export const Select: React.FC<SelectProps> = ({
           transition-all duration-200 ease-in-out
           hover:border-border-subtle
           focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light
-          ${error ? 'border-error bg-[rgba(247,140,108,0.08)] shadow-glow-error' : ''}
+          ${error ? 'border-error bg-[rgba(247,140,108,0.08)]' : ''}
           ${className}
         `}
         {...props}

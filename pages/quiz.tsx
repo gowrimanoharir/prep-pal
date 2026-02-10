@@ -80,7 +80,7 @@ export default function QuizPage() {
     <div className="min-h-screen bg-night-darkest py-6 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6 mb-6">
+        <div className="bg-night-dark border border-border-default rounded-lg p-6 mb-6">
           <Link href="/">
             <h1 className="text-2xl font-semibold text-text-primary text-center cursor-pointer hover:text-primary transition-colors">
               Prep Pal

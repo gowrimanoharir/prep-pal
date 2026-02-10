@@ -33,12 +33,12 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
   const getStyles = () => {
     // Results view - Correct answer
     if (isCorrect) {
-      return 'bg-[rgba(173,219,103,0.1)] border-l-success border-l-4 border border-border-subtle shadow-[0_0_12px_rgba(173,219,103,0.2)]';
+      return 'bg-[rgba(173,219,103,0.08)] border-l-success border-l-4 border border-[rgba(173,219,103,0.3)]';
     }
     
     // Results view - Wrong answer
     if (isWrong) {
-      return 'bg-[rgba(247,140,108,0.1)] border-l-error border-l-4 border border-border-subtle shadow-[0_0_12px_rgba(247,140,108,0.2)]';
+      return 'bg-[rgba(247,140,108,0.08)] border-l-error border-l-4 border border-[rgba(247,140,108,0.3)]';
     }
     
     // Results view - Unselected/neutral
@@ -48,11 +48,11 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
 
     // Quiz taking view - Selected
     if (isSelected) {
-      return 'bg-[rgba(255,203,107,0.1)] border-l-warning border-l-4 border border-warning shadow-[0_0_12px_rgba(255,203,107,0.2)]';
+      return 'bg-[rgba(255,203,107,0.1)] border-l-warning border-l-4 border border-warning';
     }
 
     // Quiz taking view - Default/hover
-    return 'bg-night-medium border-l-border-default border-l-4 border border-border-default hover:border-primary hover:bg-night-light hover:shadow-[0_2px_8px_rgba(130,170,255,0.2)]';
+    return 'bg-night-medium border-l-border-default border-l-4 border border-border-default hover:border-primary hover:bg-[rgba(130,170,255,0.05)]';
   };
 
   const getLabelStyles = () => {
@@ -63,8 +63,8 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
   };
 
   const getIcon = () => {
-    if (isCorrect) return <span className="text-success font-bold text-xl" style={{textShadow: '0 0 8px rgba(173, 219, 103, 0.5)'}}>✓</span>;
-    if (isWrong) return <span className="text-error font-bold text-xl" style={{textShadow: '0 0 8px rgba(247, 140, 108, 0.5)'}}>✗</span>;
+    if (isCorrect) return <span className="text-success font-bold text-xl">✓</span>;
+    if (isWrong) return <span className="text-error font-bold text-xl">✗</span>;
     if (isDisabled && !isSelected) return <span className="text-text-tertiary">•</span>;
     return null;
   };

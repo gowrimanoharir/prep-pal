@@ -25,7 +25,7 @@ export const ErrorNotification: React.FC<ErrorNotificationProps> = ({
   return (
     <div
       className="bg-[rgba(247,140,108,0.15)] border border-error rounded-md p-4 mb-4
-                 flex items-center justify-between gap-4 shadow-glow-error"
+                 flex items-center justify-between gap-4"
       role="alert"
     >
       <div className="flex items-center gap-2">

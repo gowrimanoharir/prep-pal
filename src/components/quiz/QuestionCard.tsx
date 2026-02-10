@@ -33,7 +33,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   const options = Object.entries(possible_ans) as [string, string][];
 
   return (
-    <div className="bg-night-dark border border-border-default rounded-lg shadow-card">
+    <div className="bg-night-dark border border-border-default rounded-lg">
       {/* Header */}
       <div className="flex justify-between items-start p-6 border-b border-border-default">
         <div>
