@@ -26,7 +26,7 @@ export default async function handler(
         const sampleResponse = await import('@/data/sample-response.json');
         // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 1000));
-        return res.status(200).json(sampleResponse.default || sampleResponse);
+        return res.status(200).json(sampleResponse.default);
       } catch {
         return res.status(500).json({ 
           error: 'No API key configured and no mock data found. Copy sample-response.json.example to sample-response.json or set APP_INT_KEY.'

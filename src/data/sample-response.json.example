@@ -1,0 +1,16 @@
+{
+  "questions": [
+    {
+      "question": "What is the correct way to declare a variable in JavaScript?",
+      "type": "mcq",
+      "topic": "Variables",
+      "options": [
+        { "key": "A", "value": "var myVar = 10;" },
+        { "key": "B", "value": "variable myVar = 10;" },
+        { "key": "C", "value": "v myVar = 10;" },
+        { "key": "D", "value": "declare myVar = 10;" }
+      ],
+      "answer": "A"
+    }
+  ]
+}
