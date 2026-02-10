@@ -25,8 +25,6 @@ export default async function handler(
     
     // In development, always use mock data
     if (isDevelopment) {
-      console.log('Development mode: Using mock data');
-      
       try {
         // Dynamically import sample response if it exists
         const sampleModule = await import('@/data/sample-response.json');
@@ -42,7 +40,6 @@ export default async function handler(
         
         return res.status(200).json(sampleResponse);
       } catch (error) {
-        console.error('Mock data error:', error);
         return res.status(500).json({ 
           error: 'Development mode: No mock data found. Copy sample-response.json.example to sample-response.json.',
           details: error instanceof Error ? error.message : 'Unknown error'
@@ -58,7 +55,6 @@ export default async function handler(
     }
 
     // Real OpenAI API call
-    console.log('Using OpenAI API with key');
     const openai = new OpenAI({
       apiKey: process.env.APP_INT_KEY,
     });
@@ -75,19 +71,13 @@ export default async function handler(
         },
       },
     });
-
-    console.log('OpenAI API Response:', JSON.stringify(response, null, 2));
     
     // Extract and parse the output_text from OpenAI response
     const outputText = (response as unknown as OpenAIResponseWithOutput).output_text;
-    console.log('Output text:', outputText);
-    
     const quizData = JSON.parse(outputText);
-    console.log('Parsed quiz data:', JSON.stringify(quizData, null, 2));
     
     return res.status(200).json(quizData);
   } catch (error) {
-    console.error('Error generating quiz:', error);
     return res.status(500).json({ 
       error: 'Failed to generate quiz. Please try again.',
       details: error instanceof Error ? error.message : 'Unknown error'

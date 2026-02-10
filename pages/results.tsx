@@ -84,7 +84,6 @@ export default function ResultsPage() {
     } catch (err) {
       setLoading(false);
       setError('Network error. Please check your connection and try again.');
-      console.error(err);
     }
   };
 

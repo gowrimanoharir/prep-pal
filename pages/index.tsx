@@ -127,7 +127,6 @@ export default function Home() {
     } catch (err) {
       setLoading(false);
       setError('Network error. Please check your connection and try again.');
-      console.error(err);
     }
   };
 
