@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Windows command redirect artifact
+nul
+
+# Local mock data (not committed)
+src/data/sample-response.json
