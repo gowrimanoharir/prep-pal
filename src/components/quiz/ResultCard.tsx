@@ -23,47 +23,47 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   return (
     <div
       className={`
-        bg-[#334155] border border-[#475569] rounded-lg overflow-hidden mb-6
+        bg-night-dark border border-border-default rounded-lg overflow-hidden mb-4
         ${
           isCorrect
-            ? 'border-l-4 border-l-[#10B981]'
-            : 'border-l-4 border-l-[#FB7185]'
+            ? 'border-l-4 border-l-success shadow-[0_2px_8px_rgba(0,0,0,0.3),0_0_20px_rgba(173,219,103,0.1)]'
+            : 'border-l-4 border-l-error shadow-[0_2px_8px_rgba(0,0,0,0.3),0_0_20px_rgba(247,140,108,0.1)]'
         }
       `}
       style={{
         background: isCorrect
-          ? 'linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, #334155 8px)'
-          : 'linear-gradient(90deg, rgba(251, 113, 133, 0.1) 0%, #334155 8px)'
+          ? 'linear-gradient(90deg, rgba(173, 219, 103, 0.15) 0%, #0B2942 12px)'
+          : 'linear-gradient(90deg, rgba(247, 140, 108, 0.15) 0%, #0B2942 12px)'
       }}
     >
       {/* Header */}
-      <div className="px-6 py-4 border-b border-[#475569] flex justify-between items-start">
+      <div className="px-6 py-5 border-b border-border-default flex justify-between items-start">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-lg font-semibold text-[#F1F5F9]">
+            <h3 className="text-lg font-semibold text-text-primary">
               Question {questionNumber}
             </h3>
             {isCorrect ? (
-              <span className="text-[#10B981] text-xl font-bold">✓</span>
+              <span className="text-success text-2xl font-bold" style={{textShadow: '0 0 8px rgba(173, 219, 103, 0.5)'}}>✓</span>
             ) : (
-              <span className="text-[#FB7185] text-xl font-bold">✗</span>
+              <span className="text-error text-2xl font-bold" style={{textShadow: '0 0 8px rgba(247, 140, 108, 0.5)'}}>✗</span>
             )}
           </div>
-          <p className="text-sm text-[#94A3B8]">
-            Topic: {topic}
+          <p className="text-sm text-text-secondary">
+            Topic: <span className="font-semibold text-text-primary">{topic}</span>
           </p>
         </div>
       </div>
 
       {/* Question Text */}
-      <div className="px-6 py-4 border-b border-[#475569]">
-        <p className="text-base text-[#F1F5F9]">
+      <div className="px-6 py-5 border-b border-border-default">
+        <p className="text-base text-text-primary leading-relaxed">
           {questionText}
         </p>
       </div>
 
       {/* Answer Options */}
-      <div className="px-6 py-4 space-y-2">
+      <div className="px-6 py-5 space-y-3">
         {options.map(([optionKey, optionText]) => {
           const isCorrectAnswer = optionKey === answer;
           const isUserAnswer = optionKey === userAnswer;

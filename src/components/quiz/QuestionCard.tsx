@@ -33,23 +33,23 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   const options = Object.entries(possible_ans) as [string, string][];
 
   return (
-    <div className="bg-[#334155] border border-[#475569] rounded-lg">
+    <div className="bg-night-dark border border-border-default rounded-lg shadow-card">
       {/* Header */}
-      <div className="flex justify-between items-start p-6 border-b border-[#475569]">
+      <div className="flex justify-between items-start p-6 border-b border-border-default">
         <div>
-          <h2 className="text-xl font-semibold text-[#F1F5F9] mb-1">
+          <h2 className="text-xl font-semibold text-text-primary mb-1">
             Question {questionNumber}
           </h2>
-          <p className="text-sm text-[#94A3B8]">Topic: {topic}</p>
+          <p className="text-sm text-text-secondary">Topic: <span className="font-semibold text-text-primary">{topic}</span></p>
         </div>
-        <span className="bg-[#64748B] px-3 py-1 rounded text-xs text-[#F1F5F9]">
+        <span className="bg-[rgba(199,146,234,0.15)] border border-[rgba(199,146,234,0.3)] text-purple px-3 py-1.5 rounded text-sm font-medium">
           {getCategoryDisplay(category)} / {getSubcategoryDisplay(subcategory)} / {difficulty}
         </span>
       </div>
 
       {/* Question Text */}
-      <div className="p-6 border-b border-[#475569]">
-        <p className="text-base text-[#F1F5F9] leading-relaxed">
+      <div className="p-6 border-b border-border-default">
+        <p className="text-base text-text-primary leading-relaxed">
           {questionText}
         </p>
       </div>

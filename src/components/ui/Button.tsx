@@ -14,23 +14,27 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'font-medium transition-all duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]';
+  const baseStyles = 'font-semibold transition-all duration-200 ease-in-out focus-visible:outline-none';
 
   const variantStyles = {
     primary: `
-      bg-[var(--primary)] text-[#0F172A] border-none rounded-md px-8 py-3 text-base font-medium
-      hover:bg-[var(--primary-hover)]
-      disabled:bg-[var(--surface-elevated)] disabled:text-[var(--text-tertiary)] disabled:cursor-not-allowed disabled:opacity-50
+      bg-primary text-night-darkest border-none rounded-md px-8 py-3 text-base font-semibold
+      shadow-[0_2px_8px_rgba(130,170,255,0.3)]
+      hover:bg-primary-hover hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)] hover:-translate-y-0.5
+      active:translate-y-0
+      disabled:bg-night-medium disabled:text-text-tertiary disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:transform-none
+      focus-visible:shadow-[0_0_0_3px_rgba(130,170,255,0.4)] focus-visible:border-primary
     `,
     secondary: `
-      bg-transparent text-[var(--primary)] border border-[var(--primary)] rounded-md px-8 py-3 text-base font-medium
-      hover:bg-[rgba(59,130,246,0.1)] hover:border-[var(--primary-light)]
+      bg-transparent text-primary border border-primary rounded-md px-8 py-3 text-base font-medium
+      hover:bg-[rgba(130,170,255,0.15)] hover:border-primary-light hover:shadow-glow-primary
+      focus-visible:shadow-[0_0_0_3px_rgba(130,170,255,0.4)]
     `,
     nav: `
-      bg-transparent text-[var(--text-secondary)] border-none px-0 py-2 text-base font-normal
+      bg-transparent text-text-secondary border-none px-0 py-2 text-base font-normal
       border-b-2 border-b-transparent
-      hover:text-[var(--text-primary)] hover:border-b-[var(--primary)]
-      disabled:text-[var(--surface-elevated)] disabled:cursor-not-allowed
+      hover:text-text-primary hover:border-b-primary
+      disabled:text-text-tertiary disabled:cursor-not-allowed
     `,
   };
 

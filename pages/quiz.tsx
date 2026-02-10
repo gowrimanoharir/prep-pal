@@ -21,6 +21,7 @@ export default function QuizPage() {
   } = useQuiz();
 
   const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Redirect if no quiz is loaded
   React.useEffect(() => {
@@ -54,9 +55,19 @@ export default function QuizPage() {
 
   const handleSubmit = () => {
     // Check if all questions are answered
-    const unansweredCount = questions.length - Object.keys(userAnswers).length;
+    const unansweredQuestions = questions
+      .map((_, index) => index)
+      .filter(index => !userAnswers[index])
+      .map(index => index + 1); // Convert to 1-based for display
     
-    if (unansweredCount > 0) {
+    if (unansweredQuestions.length > 0) {
+      const questionList = unansweredQuestions.length === 1 
+        ? `Question ${unansweredQuestions[0]}`
+        : unansweredQuestions.length === 2
+        ? `Questions ${unansweredQuestions[0]} and ${unansweredQuestions[1]}`
+        : `Questions ${unansweredQuestions.slice(0, -1).join(', ')}, and ${unansweredQuestions[unansweredQuestions.length - 1]}`;
+      
+      setErrorMessage(`Please answer all questions before submitting. Unanswered: ${questionList}`);
       setShowError(true);
       return;
     }
@@ -66,12 +77,12 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#475569] py-6 px-4">
+    <div className="min-h-screen bg-night-darkest py-6 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="bg-slate-700 border border-slate-600 rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6 mb-6">
           <Link href="/">
-            <h1 className="text-2xl font-semibold text-slate-50 text-center cursor-pointer hover:text-blue-400 transition-colors">
+            <h1 className="text-2xl font-semibold text-text-primary text-center cursor-pointer hover:text-primary transition-colors">
               Prep Pal
             </h1>
           </Link>
@@ -79,9 +90,11 @@ export default function QuizPage() {
 
         {showError && (
           <ErrorNotification
-            message="Please answer all questions before submitting"
-            onClose={() => setShowError(false)}
-            autoClose
+            message={errorMessage}
+            onClose={() => {
+              setShowError(false);
+              setErrorMessage('');
+            }}
           />
         )}
 

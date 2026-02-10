@@ -23,11 +23,11 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-[var(--text-primary)] text-base font-medium mb-2">
+        <label className="block text-text-secondary text-sm font-medium mb-2">
           {label}
         </label>
       )}
-      <div className="flex gap-3" role="radiogroup" aria-label={label}>
+      <div className="flex gap-4" role="radiogroup" aria-label={label}>
         {options.map((option) => (
           <button
             key={option.value}
@@ -36,12 +36,12 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
             aria-checked={value === option.value}
             onClick={() => onChange(option.value)}
             className={`
-              flex-1 rounded-md px-4 py-3 text-base font-medium
+              flex-1 rounded-md px-6 py-3 text-base font-medium
               cursor-pointer transition-all duration-200 ease-in-out
               ${
                 value === option.value
-                  ? 'bg-[#64748B] border-2 border-[#FCD34D] text-[#F1F5F9] shadow-[inset_0_0_0_2px_#FCD34D]'
-                  : 'bg-transparent border border-[#64748B] text-[#CBD5E1] hover:border-[#94A3B8]'
+                  ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                  : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
               }
             `}
           >

@@ -24,18 +24,18 @@ export const ErrorNotification: React.FC<ErrorNotificationProps> = ({
 
   return (
     <div
-      className="bg-[rgba(251,113,133,0.1)] border border-[var(--error)] rounded-lg p-4 mb-4
-                 flex items-center justify-between gap-4"
+      className="bg-[rgba(247,140,108,0.15)] border border-error rounded-md p-4 mb-4
+                 flex items-center justify-between gap-4 shadow-glow-error"
       role="alert"
     >
       <div className="flex items-center gap-2">
-        <span className="text-[var(--error)] font-bold text-lg">⚠</span>
-        <p className="text-[var(--error)] text-base">{message}</p>
+        <span className="text-error font-bold text-lg">⚠</span>
+        <p className="text-error text-base">{message}</p>
       </div>
       {onClose && (
         <button
           onClick={onClose}
-          className="text-[var(--error)] hover:text-[var(--text-primary)] transition-colors"
+          className="text-error hover:text-text-primary transition-colors"
           aria-label="Close notification"
         >
           ✕

@@ -16,17 +16,18 @@ export const Select: React.FC<SelectProps> = ({
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium text-[#CBD5E1] mb-2">
+        <label className="block text-sm font-medium text-text-secondary mb-2">
           {label}
         </label>
       )}
       <select
         className={`
-          w-full bg-[#64748B] border border-[#475569] rounded-md
-          px-4 py-3 text-[#F1F5F9] text-base
+          w-full bg-night-medium border border-border-default rounded-md
+          px-4 py-3 text-text-primary text-base
           transition-all duration-200 ease-in-out
-          focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent
-          ${error ? 'border-[#FB7185] bg-[rgba(251,113,133,0.05)]' : ''}
+          hover:border-border-subtle
+          focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light
+          ${error ? 'border-error bg-[rgba(247,140,108,0.08)] shadow-glow-error' : ''}
           ${className}
         `}
         {...props}
@@ -38,7 +39,7 @@ export const Select: React.FC<SelectProps> = ({
         ))}
       </select>
       {error && (
-        <div className="flex items-center gap-1 mt-1 text-[var(--error)] text-sm">
+        <div className="flex items-center gap-1 mt-1 text-error text-sm">
           {error}
         </div>
       )}

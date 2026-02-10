@@ -7,7 +7,7 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ children, className = '' }) => {
   return (
-    <div className={`bg-[var(--surface)] border border-[var(--border)] rounded-lg p-6 ${className}`}>
+    <div className={`bg-night-dark border border-border-default rounded-lg p-6 shadow-card hover:border-border-subtle hover:shadow-card-hover transition-all ${className}`}>
       {children}
     </div>
   );
@@ -20,7 +20,7 @@ interface CardHeaderProps {
 
 export const CardHeader: React.FC<CardHeaderProps> = ({ children, className = '' }) => {
   return (
-    <div className={`bg-[var(--surface)] border border-[var(--border)] rounded-t-lg px-6 py-4 border-b ${className}`}>
+    <div className={`bg-night-dark border border-border-default rounded-t-lg px-6 py-4 border-b ${className}`}>
       {children}
     </div>
   );
@@ -33,7 +33,7 @@ interface CardBodyProps {
 
 export const CardBody: React.FC<CardBodyProps> = ({ children, className = '' }) => {
   return (
-    <div className={`bg-[var(--surface)] p-6 ${className}`}>
+    <div className={`bg-night-dark p-6 ${className}`}>
       {children}
     </div>
   );

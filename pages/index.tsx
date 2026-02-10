@@ -145,12 +145,12 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-600 py-8 px-4">
+    <div className="min-h-screen bg-night-darkest py-8 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Title Card */}
-        <div className="bg-slate-700 border border-slate-600 rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6 mb-6">
           <Link href="/">
-            <h1 className="text-2xl font-semibold text-slate-50 text-center cursor-pointer hover:text-blue-400 transition-colors">
+            <h1 className="text-2xl font-semibold text-text-primary text-center cursor-pointer hover:text-primary transition-colors">
               Prep Pal
             </h1>
           </Link>
@@ -167,14 +167,14 @@ export default function Home() {
         {/* Form Cards */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Category Card */}
-          <div className="bg-[#334155] border border-[#475569] rounded-lg shadow-sm p-6">
-            <label className="block text-sm font-medium text-[#CBD5E1] mb-2">
+          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+            <label className="block text-sm font-medium text-text-secondary mb-2">
               Category
             </label>
             <select
               value={category}
               onChange={handleCategoryChange}
-              className="w-full bg-[#64748B] border border-[#475569] rounded-md px-4 py-3 text-[#F1F5F9] text-base focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-colors"
+              className="w-full bg-night-medium border border-border-default rounded-md px-4 py-3 text-text-primary text-base focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light hover:border-border-subtle transition-all"
             >
               <option value="">Select a category</option>
               {CATEGORIES.map((cat) => (
@@ -186,15 +186,15 @@ export default function Home() {
           </div>
 
           {/* Subcategory Card */}
-          <div className="bg-[#334155] border border-[#475569] rounded-lg shadow-sm p-6">
-            <label className="block text-sm font-medium text-[#CBD5E1] mb-2">
+          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+            <label className="block text-sm font-medium text-text-secondary mb-2">
               Subcategory
             </label>
             <select
               value={subcategory}
               onChange={(e) => setSubcategory(e.target.value)}
               disabled={!category}
-              className="w-full bg-[#64748B] border border-[#475569] rounded-md px-4 py-3 text-[#F1F5F9] text-base focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-night-medium border border-border-default rounded-md px-4 py-3 text-text-primary text-base focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] focus:bg-night-light hover:border-border-subtle transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Select a subcategory</option>
               {subcategoryOptions.map((sub) => (
@@ -206,15 +206,15 @@ export default function Home() {
           </div>
 
           {/* Number of Questions Card */}
-          <div className="bg-[#334155] border border-[#475569] rounded-lg shadow-sm p-6">
-            <label className="block text-sm font-medium text-[#CBD5E1] mb-3">
+          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+            <label className="block text-sm font-medium text-text-secondary mb-3">
               Number of Questions
             </label>
             <div className="flex items-center justify-center gap-4">
               <button
                 type="button"
                 onClick={handleDecrement}
-                className="bg-[#64748B] border border-[#475569] rounded px-4 py-2 text-[#F1F5F9] text-lg hover:bg-[#475569] transition-colors"
+                className="bg-night-medium border border-border-default rounded px-4 py-2 text-text-primary text-lg hover:bg-night-light hover:border-primary transition-all"
               >
                 −
               </button>
@@ -225,34 +225,34 @@ export default function Home() {
                 onBlur={handleNumQuestionsBlur}
                 min={MIN_QUESTIONS}
                 max={MAX_QUESTIONS}
-                className="bg-[#64748B] border border-[#475569] rounded px-6 py-2 w-20 text-center text-[#F1F5F9] text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="bg-night-medium border border-border-default rounded px-6 py-2 w-20 text-center text-text-primary text-lg font-semibold focus:outline-none focus:border-primary focus:shadow-[0_0_0_3px_rgba(130,170,255,0.2)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               />
               <button
                 type="button"
                 onClick={handleIncrement}
-                className="bg-[#64748B] border border-[#475569] rounded px-4 py-2 text-[#F1F5F9] text-lg hover:bg-[#475569] transition-colors"
+                className="bg-night-medium border border-border-default rounded px-4 py-2 text-text-primary text-lg hover:bg-night-light hover:border-primary transition-all"
               >
                 +
               </button>
             </div>
-            <p className="text-xs text-[#94A3B8] text-center mt-3">
+            <p className="text-xs text-text-tertiary text-center mt-3">
               Choose between {MIN_QUESTIONS} and {MAX_QUESTIONS} questions
             </p>
           </div>
 
           {/* Difficulty Level Card */}
-          <div className="bg-[#334155] border border-[#475569] rounded-lg shadow-sm p-6">
-            <label className="block text-sm font-medium text-[#CBD5E1] mb-3">
+          <div className="bg-night-dark border border-border-default rounded-lg shadow-card p-6">
+            <label className="block text-sm font-medium text-text-secondary mb-3">
               Difficulty Level
             </label>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <button
                 type="button"
                 onClick={() => setDifficulty('Beginner')}
-                className={`flex-1 rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Beginner'
-                    ? 'bg-[#64748B] border-2 border-[#FCD34D] text-[#F1F5F9] shadow-[inset_0_0_0_2px_#FCD34D]'
-                    : 'bg-transparent border border-[#64748B] text-[#CBD5E1] hover:border-[#94A3B8]'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                    : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
                 Beginner
@@ -260,10 +260,10 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setDifficulty('Intermediate')}
-                className={`flex-1 rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Intermediate'
-                    ? 'bg-[#64748B] border-2 border-[#FCD34D] text-[#F1F5F9] shadow-[inset_0_0_0_2px_#FCD34D]'
-                    : 'bg-transparent border border-[#64748B] text-[#CBD5E1] hover:border-[#94A3B8]'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                    : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
                 Intermediate
@@ -271,10 +271,10 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setDifficulty('Senior')}
-                className={`flex-1 rounded-md px-4 py-3 text-base font-medium transition-colors ${
+                className={`flex-1 rounded-md px-6 py-3 text-base font-medium transition-all ${
                   difficulty === 'Senior'
-                    ? 'bg-[#64748B] border-2 border-[#FCD34D] text-[#F1F5F9] shadow-[inset_0_0_0_2px_#FCD34D]'
-                    : 'bg-transparent border border-[#64748B] text-[#CBD5E1] hover:border-[#94A3B8]'
+                    ? 'bg-[rgba(255,203,107,0.1)] border-2 border-warning text-text-primary font-medium shadow-[0_0_12px_rgba(255,203,107,0.3),inset_0_0_0_1px_#FFCB6B]'
+                    : 'bg-transparent border border-night-medium text-text-secondary hover:border-primary hover:bg-[rgba(130,170,255,0.05)]'
                 }`}
               >
                 Senior
@@ -286,7 +286,7 @@ export default function Home() {
           <div className="flex justify-center pt-2">
             <button
               type="submit"
-              className="bg-[#3B82F6] text-[#0F172A] font-medium px-8 py-3 rounded-md hover:bg-[#2563EB] transition-colors text-base"
+              className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all shadow-[0_2px_8px_rgba(130,170,255,0.3)] hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)]"
             >
               Generate Quiz
             </button>

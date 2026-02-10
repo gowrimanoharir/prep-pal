@@ -31,29 +31,42 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
   };
 
   const getStyles = () => {
-    // Results view
+    // Results view - Correct answer
     if (isCorrect) {
-      return 'bg-[rgba(16,185,129,0.1)] border-l-[#10B981] border-l-4 border border-[#475569]';
+      return 'bg-[rgba(173,219,103,0.1)] border-l-success border-l-4 border border-border-subtle shadow-[0_0_12px_rgba(173,219,103,0.2)]';
     }
+    
+    // Results view - Wrong answer
     if (isWrong) {
-      return 'bg-[rgba(251,113,133,0.1)] border-l-[#FB7185] border-l-4 border border-[#475569]';
+      return 'bg-[rgba(247,140,108,0.1)] border-l-error border-l-4 border border-border-subtle shadow-[0_0_12px_rgba(247,140,108,0.2)]';
     }
+    
+    // Results view - Unselected/neutral
     if (isDisabled && !isSelected) {
-      return 'bg-[#334155] bg-opacity-30 border-l-[#475569] border-l-4 border border-[#475569] opacity-70';
+      return 'bg-night-dark border-l-border-default border-l-4 border border-border-default opacity-60';
     }
 
-    // Quiz taking view
+    // Quiz taking view - Selected
     if (isSelected) {
-      return 'bg-[#64748B] border-l-[#FCD34D] border-l-4 border border-[#475569]';
+      return 'bg-[rgba(255,203,107,0.1)] border-l-warning border-l-4 border border-warning shadow-[0_0_12px_rgba(255,203,107,0.2)]';
     }
 
-    return 'bg-[#64748B] border-l-[#475569] border-l-4 border border-[#475569] hover:border-[#60A5FA]';
+    // Quiz taking view - Default/hover
+    return 'bg-night-medium border-l-border-default border-l-4 border border-border-default hover:border-primary hover:bg-night-light hover:shadow-[0_2px_8px_rgba(130,170,255,0.2)]';
+  };
+
+  const getLabelStyles = () => {
+    if (isCorrect || isWrong) return 'text-text-primary';
+    if (isSelected) return 'text-warning font-bold';
+    if (isDisabled && !isSelected) return 'text-text-tertiary';
+    return 'text-text-secondary';
   };
 
   const getIcon = () => {
-    if (isCorrect) return <span className="text-[#10B981] font-bold text-lg">✓</span>;
-    if (isWrong) return <span className="text-[#FB7185] font-bold text-lg">✗</span>;
-    return <span className="text-[#94A3B8]">•</span>;
+    if (isCorrect) return <span className="text-success font-bold text-xl" style={{textShadow: '0 0 8px rgba(173, 219, 103, 0.5)'}}>✓</span>;
+    if (isWrong) return <span className="text-error font-bold text-xl" style={{textShadow: '0 0 8px rgba(247, 140, 108, 0.5)'}}>✗</span>;
+    if (isDisabled && !isSelected) return <span className="text-text-tertiary">•</span>;
+    return null;
   };
 
   return (
@@ -62,17 +75,19 @@ export const AnswerOption: React.FC<AnswerOptionProps> = ({
       onClick={onSelect}
       disabled={isDisabled}
       className={`
-        w-full rounded-md px-4 py-4
-        text-[#F1F5F9] text-base text-left
+        w-full rounded-md px-5 py-4
+        text-text-primary text-base text-left
         transition-all duration-200 ease-in-out
-        flex items-start gap-3
+        flex items-center gap-3
         ${getStyles()}
         ${isDisabled ? 'cursor-default' : 'cursor-pointer'}
       `}
     >
-      <span className="font-semibold min-w-[24px]">{getOptionLabel(optionKey)}</span>
+      <span className={`font-semibold min-w-[20px] ${getLabelStyles()}`}>
+        {getOptionLabel(optionKey)}
+      </span>
       <span className="flex-1">{optionText}</span>
-      {(isCorrect || isWrong || (isDisabled && !isSelected)) && (
+      {getIcon() && (
         <span className="ml-auto">{getIcon()}</span>
       )}
     </button>

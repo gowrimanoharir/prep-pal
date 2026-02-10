@@ -4,25 +4,20 @@
 
 @layer base {
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    background-color: #475569;
-    color: #F1F5F9;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-night-darkest text-text-primary;
+    font-family: 'Inter', 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(130, 170, 255, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(199, 146, 234, 0.03) 0%, transparent 50%);
+  }
+
+  * {
+    @apply transition-all duration-200 ease-in-out;
   }
 }
 
 @layer utilities {
-  .animate-spin {
-    animation: spin 1s linear infinite;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .text-balance {
+    text-wrap: balance;
   }
 }

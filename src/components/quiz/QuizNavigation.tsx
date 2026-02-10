@@ -30,19 +30,14 @@ export const QuizNavigation: React.FC<QuizNavigationProps> = ({
       {/* Progress Bar */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-[#CBD5E1] text-sm">
+          <span className="text-text-secondary text-sm">
             Question {currentQuestion} of {totalQuestions}
           </span>
-          <span className="text-[#CBD5E1] text-sm">
+          <span className="text-text-secondary text-sm">
             {Math.round((currentQuestion / totalQuestions) * 100)}%
           </span>
         </div>
-        <div className="w-full h-1 bg-[#64748B] rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-[#3B82F6] transition-all duration-300" 
-            style={{ width: `${(currentQuestion / totalQuestions) * 100}%` }}
-          />
-        </div>
+        <ProgressBar current={currentQuestion} total={totalQuestions} />
       </div>
 
       {/* Navigation Buttons */}
@@ -52,19 +47,19 @@ export const QuizNavigation: React.FC<QuizNavigationProps> = ({
           disabled={isFirstQuestion}
           className={`text-base px-2 py-1 border-b-2 border-transparent transition-all
             ${isFirstQuestion 
-              ? 'text-[#64748B] cursor-not-allowed opacity-50' 
-              : 'text-[#CBD5E1] hover:text-[#F1F5F9] hover:border-[#3B82F6]'
+              ? 'text-text-tertiary cursor-not-allowed' 
+              : 'text-text-secondary hover:text-text-primary hover:border-primary'
             }`}
         >
           ← Previous
         </button>
 
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           {!isLastQuestion && (
             <>
               <button
                 onClick={onSkip}
-                className="text-[#CBD5E1] text-base px-2 py-1 border-b-2 border-transparent hover:text-[#F1F5F9] hover:border-[#3B82F6] transition-all"
+                className="text-text-secondary text-base px-2 py-1 border-b-2 border-transparent hover:text-text-primary hover:border-primary transition-all"
               >
                 Skip
               </button>
@@ -73,8 +68,8 @@ export const QuizNavigation: React.FC<QuizNavigationProps> = ({
                 disabled={!hasAnswer}
                 className={`text-base px-2 py-1 border-b-2 border-transparent transition-all
                   ${!hasAnswer 
-                    ? 'text-[#64748B] cursor-not-allowed opacity-50' 
-                    : 'text-[#CBD5E1] hover:text-[#F1F5F9] hover:border-[#3B82F6]'
+                    ? 'text-text-tertiary cursor-not-allowed' 
+                    : 'text-text-secondary hover:text-text-primary hover:border-primary'
                   }`}
               >
                 Continue →
@@ -89,7 +84,7 @@ export const QuizNavigation: React.FC<QuizNavigationProps> = ({
         <div className="flex justify-center mt-6">
           <button
             onClick={onSubmit}
-            className="bg-[#3B82F6] text-[#0F172A] font-medium px-8 py-3 rounded-md hover:bg-[#2563EB] transition-colors text-base"
+            className="bg-primary text-night-darkest font-semibold px-8 py-3 rounded-md hover:bg-primary-hover hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 shadow-[0_2px_8px_rgba(130,170,255,0.3)] hover:shadow-[0_4px_12px_rgba(130,170,255,0.5)]"
           >
             Submit Quiz
           </button>
