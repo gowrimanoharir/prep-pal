@@ -17,21 +17,40 @@ export default async function handler(
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Use mock data if no API key is configured (local dev without API key)
-    if (!process.env.APP_INT_KEY) {
-      console.log('No app integration found, using mock data');
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    
+    // In development, always use mock data
+    if (isDevelopment) {
+      console.log('Development mode: Using mock data');
       
       try {
         // Dynamically import sample response if it exists
-        const sampleResponse = await import('@/data/sample-response.json');
+        const sampleModule = await import('@/data/sample-response.json');
+        const sampleResponse = sampleModule.default || sampleModule;
+        
         // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 1000));
-        return res.status(200).json(sampleResponse.default);
-      } catch {
+        
+        // Ensure response has the expected structure
+        if (!sampleResponse || !sampleResponse.questions) {
+          throw new Error('Invalid mock data structure');
+        }
+        
+        return res.status(200).json(sampleResponse);
+      } catch (error) {
+        console.error('Mock data error:', error);
         return res.status(500).json({ 
-          error: 'No API key configured and no mock data found. Copy sample-response.json.example to sample-response.json or set APP_INT_KEY.'
+          error: 'Development mode: No mock data found. Copy sample-response.json.example to sample-response.json.',
+          details: error instanceof Error ? error.message : 'Unknown error'
         });
       }
+    }
+    
+    // In production, API key is required
+    if (!process.env.APP_INT_KEY) {
+      return res.status(500).json({ 
+        error: 'API key not configured. Please set integration key environment variable.'
+      });
     }
 
     // Real OpenAI API call
