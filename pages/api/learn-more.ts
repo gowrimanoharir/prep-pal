@@ -6,6 +6,10 @@ const anthropic = new Anthropic({
   apiKey: process.env.APP_INT_TWO_KEY,
 });
 
+function getCurrentYear(): number {
+  return new Date().getFullYear();
+}
+
 interface LearnMoreRequestBody {
   topic: string;
   category: string;
@@ -113,8 +117,8 @@ export default async function handler(
     }
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 2000,
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 1024,
       tools: [{ type: 'web_search_20250305', name: 'web_search' }],
       messages: [
         {
@@ -128,17 +132,16 @@ IMPORTANT: You MUST use web_search to find current, high-quality learning resour
 
 Search for:
 - Official documentation for ${subcategory} covering ${topic}
-- Quality tutorials and guides about ${topic}
-- Recent articles or videos (2023-2025) explaining ${topic}
+- A quality tutorial or guide about ${topic}
 
 Requirements:
 - Resources should be appropriate for ${difficulty} level learners
-- Prioritize official docs, reputable sites, well-known educators
-- Include mix of text tutorials, videos, and practice resources
+- Prioritize official docs and reputable sites
+- Prefer recent content (${getCurrentYear() - 2}-${getCurrentYear()}) where applicable
 
 Provide a response in valid JSON format only:
 {
-  "summary": "2-3 paragraph explanation of ${topic}",
+  "summary": "1-2 paragraph explanation of ${topic}",
   "resources": [
     {
       "title": "resource title",
@@ -149,7 +152,7 @@ Provide a response in valid JSON format only:
   ]
 }
 
-Include 4-5 resources. Use only type: "docs" | "tutorial" | "video" | "article" | "practice". Ensure all URLs are complete and real.`,
+Include 2-3 resources. Use only type: "docs" | "tutorial" | "video" | "article" | "practice". Ensure all URLs are complete and real.`,
         },
       ],
     });
@@ -204,7 +207,7 @@ Include 4-5 resources. Use only type: "docs" | "tutorial" | "video" | "article" 
     return res.status(200).json({
       success: true,
       summary: parsed.summary,
-      resources: validatedResources.slice(0, 5),
+      resources: validatedResources.slice(0, 3),
       searchPerformed: true,
     });
   } catch (error) {
