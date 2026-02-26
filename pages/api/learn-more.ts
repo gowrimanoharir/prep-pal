@@ -224,9 +224,13 @@ Include 2-3 resources. Use only type: "docs" | "tutorial" | "video" | "article" 
 
     console.log('[Learn More] Success. Returning resources:', validatedResources.map((r) => r.url));
 
+    const summary = parsed.summary
+      .replace(/<[^>]+>([\s\S]*?)<\/[^>]+>/g, '$1')
+      .trim();
+
     return res.status(200).json({
       success: true,
-      summary: parsed.summary,
+      summary,
       resources: validatedResources.slice(0, 3),
       searchPerformed: true,
     });

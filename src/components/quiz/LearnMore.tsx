@@ -199,6 +199,9 @@ export function LearnMore({
                                 <p className="text-text-tertiary text-xs mt-1 line-clamp-2">
                                   {resource.description}
                                 </p>
+                                <p className="text-text-tertiary text-xs mt-1 opacity-60 truncate">
+                                  {new URL(resource.url).hostname}
+                                </p>
                               </div>
                             </div>
                           </a>
