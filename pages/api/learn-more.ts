@@ -94,10 +94,10 @@ export default async function handler(
   }
 
   try {
-    if (!process.env.ANTHROPIC_API_KEY) {
+    if (!process.env.APP_INT_TWO_KEY) {
       return res.status(500).json({
         success: false,
-        error: 'Learn More is not configured. Please set ANTHROPIC_API_KEY.',
+        error: 'Learn More is not configured.',
         searchPerformed: false,
       });
     }
