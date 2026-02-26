@@ -90,7 +90,7 @@ export default function ResultsPage() {
       setQuestions(data.questions);
       setLoading(false);
       router.push('/quiz');
-    } catch (err) {
+    } catch {
       setLoading(false);
       setError('Network error. Please check your connection and try again.');
     }
@@ -130,6 +130,9 @@ export default function ResultsPage() {
               userAnswer={result.userAnswer}
               isCorrect={result.isCorrect}
               topic={result.question.topic}
+              category={getCategoryDisplay(config.category)}
+              subcategory={getSubcategoryDisplay(config.subcategory)}
+              difficulty={config.difficulty}
             />
           ))}
         </div>

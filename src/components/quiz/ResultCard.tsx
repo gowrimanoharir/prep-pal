@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Question } from '@/types/quiz.types';
 import { AnswerOption } from './AnswerOption';
+import { LearnMore } from './LearnMore';
 
 interface ResultCardProps {
   question: Question;
@@ -8,6 +9,9 @@ interface ResultCardProps {
   userAnswer: string | null;
   isCorrect: boolean;
   topic: string;
+  category: string;
+  subcategory: string;
+  difficulty: string;
 }
 
 export const ResultCard: React.FC<ResultCardProps> = ({
@@ -16,6 +20,9 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   userAnswer,
   isCorrect,
   topic,
+  category,
+  subcategory,
+  difficulty,
 }) => {
   const { question: questionText, possible_ans, answer } = question;
   const options = Object.entries(possible_ans) as [string, string][];
@@ -49,8 +56,16 @@ export const ResultCard: React.FC<ResultCardProps> = ({
               <span className="text-error text-2xl font-bold">✗</span>
             )}
           </div>
-          <p className="text-sm text-text-secondary">
-            Topic: <span className="font-semibold text-text-primary">{topic}</span>
+          <p className="text-sm text-text-secondary flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>
+              Topic: <span className="font-semibold text-text-primary">{topic}</span>
+            </span>
+            <LearnMore
+              topic={topic}
+              category={category}
+              subcategory={subcategory}
+              difficulty={difficulty}
+            />
           </p>
         </div>
       </div>
