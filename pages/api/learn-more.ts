@@ -116,9 +116,12 @@ export default async function handler(
       });
     }
 
+    console.log(`[Learn More] Requesting resources for: "${topic}" (${subcategory} / ${difficulty})`);
+
     const message = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 1024,
+      system: 'You are a learning assistant for a quiz application. You MUST use the web_search tool before responding — never provide URLs from training data. Only recommend resources found through web search. Always respond in valid JSON format only.',
       tools: [{ type: 'web_search_20250305', name: 'web_search' }],
       messages: [
         {
@@ -157,11 +160,16 @@ Include 2-3 resources. Use only type: "docs" | "tutorial" | "video" | "article" 
       ],
     });
 
-    const webSearchUsed = message.content.some(
-      (block) => block.type === 'tool_use' && block.name === 'web_search'
-    );
+    const blockTypes = message.content.map((b) => (b as { type: string }).type);
+    console.log(`[Learn More] Response blocks: ${blockTypes.join(', ')}`);
+
+    const webSearchUsed = message.content.some((block) => {
+      const b = block as { type: string; name?: string };
+      return (b.type === 'tool_use' || b.type === 'server_tool_use') && b.name === 'web_search';
+    });
 
     if (!webSearchUsed) {
+      console.error('[Learn More] Web search was not used. Block types received:', blockTypes);
       return res.status(500).json({
         success: false,
         error: 'Unable to search for learning resources. Please try again.',
@@ -169,8 +177,11 @@ Include 2-3 resources. Use only type: "docs" | "tutorial" | "video" | "article" 
       });
     }
 
+    console.log('[Learn More] Web search confirmed. Extracting text response...');
+
     const textBlock = message.content.find((block) => block.type === 'text');
     if (!textBlock || textBlock.type !== 'text') {
+      console.error('[Learn More] No text block found in response. Block types:', blockTypes);
       return res.status(500).json({
         success: false,
         error: 'Invalid response format',
@@ -186,6 +197,7 @@ Include 2-3 resources. Use only type: "docs" | "tutorial" | "video" | "article" 
         .trim();
       parsed = JSON.parse(cleanedText);
     } catch {
+      console.error('[Learn More] Failed to parse JSON. Raw text:', textBlock.text);
       return res.status(500).json({
         success: false,
         error: 'Failed to parse learning resources',
@@ -193,16 +205,24 @@ Include 2-3 resources. Use only type: "docs" | "tutorial" | "video" | "article" 
       });
     }
 
+    console.log(`[Learn More] Parsed ${parsed.resources?.length ?? 0} resources. Validating URLs...`);
+
     const searchedUrls = extractUrlsFromToolResults(message.content);
+    console.log(`[Learn More] Extracted ${searchedUrls.size} URLs from search results`);
+
     const validatedResources = await validateResources(parsed.resources ?? [], searchedUrls);
+    console.log(`[Learn More] ${validatedResources.length} resources passed validation`);
 
     if (validatedResources.length === 0) {
+      console.error('[Learn More] All resources failed validation. Parsed resources:', parsed.resources);
       return res.status(500).json({
         success: false,
         error: 'No valid learning resources found. Please try again.',
         searchPerformed: true,
       });
     }
+
+    console.log('[Learn More] Success. Returning resources:', validatedResources.map((r) => r.url));
 
     return res.status(200).json({
       success: true,
